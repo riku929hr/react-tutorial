@@ -10,6 +10,12 @@ export const gameReducer = (state = initialState, action) => {
         stepNumber: state.stepNumber + 1,
         xIsNext: !state.xIsNext,
       };
+    case ActionType.JUMPTO:
+      return {
+        ...state,
+        stepNumber: action.move,
+        xIsNext: action.move % 2 === 0,
+      };
     default:
       return state;
   }

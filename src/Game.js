@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Board from "./components/Board";
 import GameStatus from "./components/GameStatus";
-import { place } from "./actions";
+import { place, jumpTo } from "./actions";
 
 import { calculateWinner } from "./functions";
 
@@ -38,13 +38,6 @@ class Game extends React.Component {
     });
   }
 
-  jumpTo(step) {
-    this.setState({
-      stepNumber: step,
-      xIsNext: step % 2 === 0,
-    });
-  }
-
   render() {
     const history = this.state.history;
     const current = history[this.props.stepNumber];
@@ -63,7 +56,7 @@ class Game extends React.Component {
           <ol>
             {history.map((step, move) => (
               <li key={move}>
-                <button onClick={() => this.jumpTo(move)}>
+                <button onClick={() => this.props.jumpTo(move)}>
                   {move ? "Go to move #" + move : "Go to game start"}
                 </button>
               </li>
@@ -80,4 +73,4 @@ const mapStateToProps = (state) => ({
   xIsNext: state.xIsNext,
 });
 
-export default connect(mapStateToProps, { place })(Game);
+export default connect(mapStateToProps, { place, jumpTo })(Game);
