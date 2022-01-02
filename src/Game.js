@@ -14,12 +14,11 @@ class Game extends React.Component {
           squares: Array(9).fill(null),
         },
       ],
-      stepNumber: 0,
     };
   }
 
   handleClick(i) {
-    const history = this.state.history.slice(0, this.state.stepNumber + 1);
+    const history = this.state.history.slice(0, this.props.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
     if (calculateWinner(squares) || squares[i]) {
@@ -27,7 +26,7 @@ class Game extends React.Component {
     }
     squares[i] = this.props.xIsNext ? "X" : "O";
 
-    this.props.place(this.state.stepNumber, this.state.xIsNext);
+    this.props.place(this.props.stepNumber, this.props.xIsNext);
 
     this.setState({
       history: history.concat([
@@ -35,7 +34,6 @@ class Game extends React.Component {
           squares: squares,
         },
       ]),
-      stepNumber: history.length,
     });
   }
 
@@ -48,7 +46,7 @@ class Game extends React.Component {
 
   render() {
     const history = this.state.history;
-    const current = history[this.state.stepNumber];
+    const current = history[this.props.stepNumber];
     const winner = calculateWinner(current.squares);
 
     return (
