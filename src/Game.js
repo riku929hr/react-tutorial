@@ -26,7 +26,7 @@ class Game extends React.Component {
     }
     squares[i] = this.props.xIsNext ? "X" : "O";
 
-    this.props.place(this.props.stepNumber, this.props.xIsNext);
+    this.props.place();
 
     this.setState({
       history: history.concat([

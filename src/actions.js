@@ -2,8 +2,6 @@ export const ActionType = {
   PLACE: "PLACE",
 };
 
-export const place = (stepNumber, xIsNext) => ({
+export const place = () => ({
   type: ActionType.PLACE,
-  stepNumber,
-  xIsNext,
 });
