@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Board from "./components/Board";
+import GameStatus from "./components/GameStatus";
 import { place } from "./actions";
 
 import { calculateWinner } from "./functions";
@@ -58,11 +59,7 @@ class Game extends React.Component {
           />
         </div>
         <div className="game-info">
-          <div>
-            {winner
-              ? "Winner: " + winner
-              : "Next player: " + (this.props.xIsNext ? "X" : "O")}
-          </div>
+          <GameStatus winner={winner} />
           <ol>
             {history.map((step, move) => (
               <li key={move}>
