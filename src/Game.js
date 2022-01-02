@@ -1,5 +1,7 @@
 import React from "react";
+import { connect } from "react-redux";
 import Board from "./components/Board";
+import { place } from "./actions";
 
 import { calculateWinner } from "./functions";
 
@@ -25,6 +27,9 @@ class Game extends React.Component {
       return;
     }
     squares[i] = this.state.xIsNext ? "X" : "O";
+
+    this.props.place(this.state.stepNumber, this.state.xIsNext);
+
     this.setState({
       history: history.concat([
         {
@@ -77,4 +82,4 @@ class Game extends React.Component {
   }
 }
 
-export default Game;
+export default connect(null, { place })(Game);
