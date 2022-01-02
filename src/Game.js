@@ -15,7 +15,6 @@ class Game extends React.Component {
         },
       ],
       stepNumber: 0,
-      xIsNext: true,
     };
   }
 
@@ -26,7 +25,7 @@ class Game extends React.Component {
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
-    squares[i] = this.state.xIsNext ? "X" : "O";
+    squares[i] = this.props.xIsNext ? "X" : "O";
 
     this.props.place(this.state.stepNumber, this.state.xIsNext);
 
@@ -37,7 +36,6 @@ class Game extends React.Component {
         },
       ]),
       stepNumber: history.length,
-      xIsNext: !this.state.xIsNext,
     });
   }
 
@@ -65,7 +63,7 @@ class Game extends React.Component {
           <div>
             {winner
               ? "Winner: " + winner
-              : "Next player: " + (this.state.xIsNext ? "X" : "O")}
+              : "Next player: " + (this.props.xIsNext ? "X" : "O")}
           </div>
           <ol>
             {history.map((step, move) => (
@@ -82,4 +80,9 @@ class Game extends React.Component {
   }
 }
 
-export default connect(null, { place })(Game);
+const mapStateToProps = (state) => ({
+  stepNumber: state.stepNumber,
+  xIsNext: state.xIsNext,
+});
+
+export default connect(mapStateToProps, { place })(Game);
