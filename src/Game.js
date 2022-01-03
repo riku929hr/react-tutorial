@@ -19,7 +19,6 @@ class Game extends React.Component {
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
-    squares[i] = this.props.xIsNext ? "X" : "O";
 
     this.props.place(i);
   }
