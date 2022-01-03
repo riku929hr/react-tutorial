@@ -3,8 +3,9 @@ export const ActionType = {
   JUMPTO: "JUMPTO",
 };
 
-export const place = () => ({
+export const place = (toWhere) => ({
   type: ActionType.PLACE,
+  toWhere,
 });
 
 export const jumpTo = (move) => ({
