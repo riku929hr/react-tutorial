@@ -9,17 +9,10 @@ import { calculateWinner } from "./functions";
 class Game extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      history: [
-        {
-          squares: Array(9).fill(null),
-        },
-      ],
-    };
   }
 
   handleClick(i) {
-    const history = this.state.history.slice(0, this.props.stepNumber + 1);
+    const history = this.props.history.slice(0, this.props.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
     if (calculateWinner(squares) || squares[i]) {
@@ -28,18 +21,10 @@ class Game extends React.Component {
     squares[i] = this.props.xIsNext ? "X" : "O";
 
     this.props.place(i);
-
-    this.setState({
-      history: history.concat([
-        {
-          squares: squares,
-        },
-      ]),
-    });
   }
 
   render() {
-    const history = this.state.history;
+    const history = this.props.history;
     const current = history[this.props.stepNumber];
     const winner = calculateWinner(current.squares);
 
@@ -69,6 +54,7 @@ class Game extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
+  history: state.history,
   stepNumber: state.stepNumber,
   xIsNext: state.xIsNext,
 });
